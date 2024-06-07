@@ -1,5 +1,6 @@
 import RepoItem from "./RepoItem";
 
+// eslint-disable-next-line react/prop-types
 function Repos({ repos }) {
   const listStyle = {
     display: "grid",

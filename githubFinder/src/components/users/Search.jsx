@@ -1,25 +1,42 @@
 import { ThemeContext } from "../../context/ThemeContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Users from "./Users";
 import { searchUserApi } from "../../api";
 import { useContext } from "react";
+import {
+  useHistory,
+  useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
 const Search = () => {
-  const context = useContext(ThemeContext)
-
+  const context = useContext(ThemeContext);
   const [text, setText] = useState("");
   const [users, setUsers] = useState([]);
+  const history = useHistory();
+  const queryParameter = useLocation();
+
   const searchUsers = async (text) => {
-    const searchUserData = await searchUserApi(text)
-    setUsers(searchUserData)
+    const searchUserData = await searchUserApi(text);
+    setUsers(searchUserData);
   };
   const clearUsers = () => {
     setUsers([]);
   };
+
+  useEffect(() => {
+    const query = queryParameter.search.split("=")[1];
+    if (query) {
+      
+      setText(query);
+      searchUsers(query);
+    }
+  }, []);
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (text === "") {
       alert("Please enter something");
     } else {
+      history.push(`/?search=${text}`);
       searchUsers(text);
       setText("");
     }
@@ -38,7 +55,9 @@ const Search = () => {
         <input
           type="submit"
           value="Search"
-          className={`btn ${context.isDarkTheme ? "darkTheme" : "bg-success" } btn-block`}
+          className={`btn ${
+            context.isDarkTheme ? "darkTheme" : "bg-success"
+          } btn-block`}
         />
       </form>
       {users.length > 0 && (

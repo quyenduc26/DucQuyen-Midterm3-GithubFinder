@@ -1,9 +1,10 @@
  import { Fragment, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Repos from "../repos/Repos";
 import { getUserApi, getUserReposApi } from "../../api";
 const User = () => {
   const { id } = useParams();
+  const history = useHistory();
 
   const [user, setUser] = useState({});
   const [repos, setRepos] = useState([]);
@@ -36,9 +37,9 @@ const User = () => {
   } = user;
   return (
     <>
-      <Link to="/" className="btn btn-light">
+      <button onClick={() => history.goBack()} className="btn btn-light">
         Back to Search
-      </Link>
+      </button>
       Hireable:{" "}
       {hireable ? (
         <i className="fas fa-check text-success" />
