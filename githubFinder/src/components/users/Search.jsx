@@ -1,18 +1,16 @@
-import axios from "axios";
+import { ThemeContext } from "../../context/ThemeContext";
 import { useState } from "react";
 import Users from "./Users";
+import { searchUserApi } from "../../api";
+import { useContext } from "react";
 const Search = () => {
+  const context = useContext(ThemeContext)
+
   const [text, setText] = useState("");
   const [users, setUsers] = useState([]);
   const searchUsers = async (text) => {
-    try {
-      const response = await axios.get(
-        `https://api.github.com/search/users?q=${text} `
-      );
-      setUsers(response.data.items);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+    const searchUserData = await searchUserApi(text)
+    setUsers(searchUserData)
   };
   const clearUsers = () => {
     setUsers([]);
@@ -40,7 +38,7 @@ const Search = () => {
         <input
           type="submit"
           value="Search"
-          className="btn btn-success btn-block"
+          className={`btn ${context.isDarkTheme ? "darkTheme" : "bg-success" } btn-block`}
         />
       </form>
       {users.length > 0 && (
