@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-unescaped-entities */
 import RepoItem from "./RepoItem";
 
 // eslint-disable-next-line react/prop-types

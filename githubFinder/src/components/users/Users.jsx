@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 import UserItem from "./UserItem";
 const Users = (props) => {
