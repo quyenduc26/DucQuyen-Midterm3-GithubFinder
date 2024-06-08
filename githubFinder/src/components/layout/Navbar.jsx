@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../context/ThemeContext";
+import { MdDarkMode } from "react-icons/md";
+import { MdLightMode } from "react-icons/md";
 const Navbar = () => {
   const context = useContext(ThemeContext)
   const navbarClass = context.isDarkTheme ? 'navbar bg-dark text-white' : 'navbar bg-success text-dark';
@@ -15,7 +17,7 @@ const Navbar = () => {
           <Link to="/about">About</Link>
         </li> 
         <li>
-          <button onClick={context.toggleTheme}>{context.isDarkTheme ? 'Light' : 'Dark' }</button>
+          <button className={`toggle ${context.isDarkTheme ? "dark-toggle" : "light-toggle"}`} onClick={context.toggleTheme}>{context.isDarkTheme ? <MdLightMode /> : <MdDarkMode /> }</button>
         </li>
       </ul>
     </nav>

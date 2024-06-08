@@ -438,3 +438,18 @@ table th {
   left: 0;
   width: 100%;
 }
+.toggle{
+  border: none;
+  display:flex;
+  padding: 5px;
+  border-radius: 50%;
+}
+.light-toggle{
+  background-color: black;
+  color: violet;
+}
+
+.dark-toggle{
+  background-color: gray;
+  color: yellow;
+}
